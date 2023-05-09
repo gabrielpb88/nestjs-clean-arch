@@ -31,7 +31,7 @@ export default {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "v8",
+  coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -88,7 +88,11 @@ export default {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    '^@domain/(.*)$': '<rootDir>/src/domain/$1',
+    '^@application/(.*)$': '<rootDir>/src/application/$1',
+    '^@infra/(.*)$': '<rootDir>/src/infra/$1',
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -174,9 +178,7 @@ export default {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    "^.*\\.ts?$":[
-      "@swc/jest"
-    ]
+    '^.*\\.ts?$': ['@swc/jest'],
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
