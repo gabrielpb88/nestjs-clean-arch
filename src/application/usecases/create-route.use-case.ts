@@ -7,12 +7,7 @@ export class CreateRouteUseCase {
   async execute(input: CreateRouteInput): Promise<CreateRouteOutput> {
     const route = new Route(input);
     await this.routeRepo.insert(route);
-    return {
-      title: route.title,
-      startPosition: route.startPosition,
-      endPosition: route.endPosition,
-      points: route.points,
-    };
+    return route.toJSON();
   }
 }
 
@@ -24,6 +19,7 @@ export interface CreateRouteInput {
 }
 
 export interface CreateRouteOutput {
+  id: string;
   title: string;
   startPosition: GeoLocation;
   endPosition: GeoLocation;
