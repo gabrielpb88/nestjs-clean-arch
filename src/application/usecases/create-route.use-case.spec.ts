@@ -5,7 +5,7 @@ describe('CreateRouteUseCase Tests', () => {
   let repository: RouteInMemoryRepository;
   let createRouteUseCase: CreateRouteUseCase;
 
-  beforeAll(() => {
+  beforeEach(() => {
     repository = new RouteInMemoryRepository();
     createRouteUseCase = new CreateRouteUseCase(repository);
   });
@@ -17,7 +17,7 @@ describe('CreateRouteUseCase Tests', () => {
       endPosition: { lat: 3, lng: 3 },
     };
     const result = await createRouteUseCase.execute(useCaseInput);
-    expect(result).toStrictEqual({ ...useCaseInput, points: [] });
+    expect(result).toStrictEqual({ id: repository.items[0].id, ...useCaseInput, points: [] });
   });
 
   it('should create a new route with routes', async () => {
@@ -28,6 +28,6 @@ describe('CreateRouteUseCase Tests', () => {
       points: [{ lat: 2, lng: 2 }],
     };
     const result = await createRouteUseCase.execute(useCaseInput);
-    expect(result).toStrictEqual({ ...useCaseInput, points: [{ lat: 2, lng: 2 }] });
+    expect(result).toStrictEqual({ id: repository.items[0].id, ...useCaseInput, points: [{ lat: 2, lng: 2 }] });
   });
 });

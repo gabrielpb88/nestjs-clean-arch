@@ -1,3 +1,5 @@
+import { randomUUID } from 'crypto';
+
 export interface GeoLocation {
   lat: number;
   lng: number;
@@ -11,47 +13,50 @@ export interface RouteProps {
 }
 
 export class Route {
-  private title;
-  private startPosition;
-  private endPosition;
-  private points;
+  public readonly id: string;
+  public props: Required<RouteProps>;
 
-  constructor(props: RouteProps) {
-    const { title, startPosition, endPosition, points } = props;
-    this.title = title;
-    this.startPosition = startPosition;
-    this.endPosition = endPosition;
-    this.points = points || [];
+  constructor(props: RouteProps, id?: string) {
+    this.id = id || randomUUID();
+    this.props = { ...props, points: props.points || [] };
   }
 
   updateTitle(value: string): void {
     // this method aims to give a reason for change, according to Clean Architecture, making it not an anemic entity
     // validations related to enterprise business rules occur in this method
-    this.title = value;
+    this.props.title = value;
   }
 
   updatePositions(startPositon: GeoLocation, endPosition: GeoLocation): void {
     // this method aims to give a reason for change, according to Clean Architecture, making it not an anemic entity
     // validations related to enterprise business rules occur in this method
-    this.startPosition = startPositon;
-    this.endPosition = endPosition;
+    this.props.startPosition = startPositon;
+    this.props.endPosition = endPosition;
   }
 
   updatePoints(points: GeoLocation[]): void {
     // this method aims to give a reason for change, according to Clean Architecture, making it not an anemic entity
     // validations related to enterprise business rules occur in this method
-    this.points = points;
+    this.props.points = points;
   }
 
   get points() {
-    return this.points;
+    return this.props.points;
   }
 
   get startPosition() {
-    return this.startPosition;
+    return this.props.startPosition;
   }
 
   get endPosition() {
-    return this.endPosition;
+    return this.props.endPosition;
+  }
+
+  get title() {
+    return this.props.title;
+  }
+
+  toJSON() {
+    return { id: this.id, ...this.props };
   }
 }

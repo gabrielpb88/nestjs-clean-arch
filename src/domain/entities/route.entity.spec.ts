@@ -10,17 +10,17 @@ describe('Route Tests', () => {
   test('constructor', () => {
     const routeProps = mockRouteProps;
     let route = new Route(routeProps);
-    expect(route).toEqual({ ...routeProps, points: [] });
+    expect(route.props).toEqual({ ...routeProps, points: [] });
 
     routeProps.points = [{ lat: 2, lng: 2 }];
     route = new Route(routeProps);
-    expect(route).toEqual(routeProps);
+    expect(route.props).toEqual(routeProps);
   });
 
   test('updateTitle method', () => {
     const route = new Route(mockRouteProps);
     route.updateTitle('new title');
-    expect(route).toEqual({ ...mockRouteProps, title: 'new title' });
+    expect(route.props).toEqual({ ...mockRouteProps, title: 'new title' });
   });
 
   test('updatePositions method', () => {
