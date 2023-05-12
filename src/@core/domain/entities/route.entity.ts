@@ -16,9 +16,18 @@ export class Route {
   public readonly id: string;
   public props: Required<RouteProps>;
 
-  constructor(props: RouteProps, id?: string) {
+  private constructor(props: RouteProps, id?: string) {
     this.id = id || randomUUID();
-    this.props = { ...props, points: props.points || [] };
+    if (!props) {
+      // @ts-ignore used by ORM
+      this.props = {};
+      return;
+    }
+    this.props = { ...props, points: props?.points || [] };
+  }
+
+  static create(props: RouteProps, id?: string) {
+    return new Route(props, id);
   }
 
   updateTitle(value: string): void {
@@ -27,10 +36,10 @@ export class Route {
     this.props.title = value;
   }
 
-  updatePositions(startPositon: GeoLocation, endPosition: GeoLocation): void {
+  updatePositions(startPosition: GeoLocation, endPosition: GeoLocation): void {
     // this method aims to give a reason for change, according to Clean Architecture, making it not an anemic entity
     // validations related to enterprise business rules occur in this method
-    this.props.startPosition = startPositon;
+    this.props.startPosition = startPosition;
     this.props.endPosition = endPosition;
   }
 
@@ -56,6 +65,21 @@ export class Route {
     return this.props.title;
   }
 
+  set title(value: string) {
+    this.props.title = value;
+  }
+
+  set startPosition(value: GeoLocation) {
+    this.props.startPosition = value;
+  }
+
+  set endPosition(value: GeoLocation) {
+    this.props.endPosition = value;
+  }
+
+  set points(value: GeoLocation[]) {
+    this.props.points = value;
+  }
   toJSON() {
     return { id: this.id, ...this.props };
   }

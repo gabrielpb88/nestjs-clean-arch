@@ -1,4 +1,4 @@
-GET http://localhost:3000/routes
+GET http://localhost:3000/
 Accept: application/json
 
 ###
@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
   "title": "any title",
-  "startPosition": { "lat":  5, "lng":  5 },
+  "startPosition": { "lat":  1, "lng":  1 },
   "endPosition": { "lat":  3, "lng":  3}
 }
 

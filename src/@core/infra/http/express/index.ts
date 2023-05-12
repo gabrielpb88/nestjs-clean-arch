@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import { CreateRouteUseCase } from '@core/application/usecases/create-route.use-case';
-import { RouteInMemoryRepository } from '@core/infra/db/route-in-memory.repository';
+import { RouteInMemoryRepository } from '@infra/db/in-memory/route-in-memory.repository';
 import { ListAllRoutesUseCase } from '@core/application/usecases/list-all-routes.use-case';
 
 const port = 3000;
