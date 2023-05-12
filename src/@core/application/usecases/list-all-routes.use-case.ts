@@ -1,5 +1,5 @@
-import { RouteRepository } from '@domain/interfaces/route.repository';
-import { GeoLocation } from '@domain/entities/route.entity';
+import { RouteRepository } from '@core/domain/interfaces/route.repository';
+import { GeoLocation } from '@core/domain/entities/route.entity';
 
 export class ListAllRoutesUseCase {
   constructor(private readonly repo: RouteRepository) {}
