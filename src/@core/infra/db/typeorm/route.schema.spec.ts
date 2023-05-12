@@ -8,7 +8,6 @@ describe('RouteSchema Test', () => {
       type: 'sqlite',
       database: ':memory:',
       synchronize: true,
-      logging: true,
       entities: [RouteSchema],
     });
     await dataSource.initialize();
