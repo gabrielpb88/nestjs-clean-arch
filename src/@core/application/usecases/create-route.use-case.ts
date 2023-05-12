@@ -5,7 +5,7 @@ export class CreateRouteUseCase {
   constructor(private readonly routeRepo: RouteRepository) {}
 
   async execute(input: CreateRouteInput): Promise<CreateRouteOutput> {
-    const route = new Route(input);
+    const route = Route.create(input);
     await this.routeRepo.insert(route);
     return route.toJSON();
   }
